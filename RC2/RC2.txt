@@ -1,0 +1,100 @@
+RC2是一种对称加密算法，所见到的安全解决方案中，使用RC2的算法不多，从资料上看，RC2算法可以替代DES算法，而且计算速度快，能在16位计算机上实现，密钥长度从1到128字节都可以。一般采用16字节，计算的数据块为8字节。
+
+
+void RC2_set_key(RC2_KEY *key, int len, const unsigned char *data,int bits);
+
+设置密钥
+
+key： RC2的密钥对象；
+
+len：密钥长度；
+
+data： 密钥数据；
+
+bits：BSAFE使用的密钥数据的位数，如果不对key做修改，此数据设定为1024，在RSA的BSAFE的库中，此数据设定为128；
+
+
+void RC2_ecb_encrypt(const unsigned char *in,unsigned char *out,RC2_KEY *key,
+             int enc);
+
+RC2 ecb计算；
+
+in： 输入数据；
+
+out： 输出数据；
+
+key： RC2的密钥对象；
+
+enc: 加密/解密模式。 加密：RC2_ENCRYPT， 解密：RC2_DECRYPT
+
+
+void RC2_encrypt(unsigned long *data,RC2_KEY *key);
+
+RC2加密计算，此函数是被其他库函数调用的底层函数；
+
+data： 输入/输出数据；
+
+key： RC2密钥对象；
+
+
+void RC2_decrypt(unsigned long *data,RC2_KEY *key);
+
+RC2解密计算，此函数被其他函数调用的底层函数；
+
+data： 输入/输出数据；
+
+key： RC2密钥对象；
+
+
+void RC2_cbc_encrypt(const unsigned char *in, unsigned char *out, long length,
+    RC2_KEY *ks, unsigned char *iv, int enc);
+
+RC2 cbc加密/解密计算；
+
+in： 输入数据；
+
+out： 输出数据；
+
+length： 数据长度；
+
+ks： RC2密钥对象；
+
+iv： 初始化向量；
+
+enc: 加密/解密模式。 加密：RC2_ENCRYPT， 解密：RC2_DECRYPT
+void RC2_cfb64_encrypt(const unsigned char *in, unsigned char *out,
+               long length, RC2_KEY *schedule, unsigned char *ivec,
+               int *num, int enc);
+
+RC2的cfb64 加密/解密计算；
+
+in： 输入数据；
+
+out： 输出数据；
+
+length： 数据长度；
+
+schedule： RC2密钥对象；
+
+ivec： 初始化向量；
+
+enc: 加密/解密模式。 加密：RC2_ENCRYPT， 解密：RC2_DECRYPT
+
+
+void RC2_ofb64_encrypt(const unsigned char *in, unsigned char *out,
+               long length, RC2_KEY *schedule, unsigned char *ivec,
+               int *num);
+
+RC2的ofb64 加密；
+
+in： 输入数据；
+
+out： 输出数据；
+
+length： 数据长度；
+
+schedule： RC2密钥对象；
+
+ivec： 初始化向量；
+
+num: 参与计算的向量数据的字节个数
